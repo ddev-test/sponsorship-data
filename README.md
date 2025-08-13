@@ -55,3 +55,37 @@ See these resources:
 * [Support DDEV](https://ddev.com/support-ddev/)
 * [GitHub Sponsors for DDEV](https://github.com/sponsors/ddev)
 
+## How to Manually Test This PR (History Branch Workflow)
+
+Because this PR is on the main `ddev/sponsorship-data` repository and GitHub branch/environment protection rules prevent PR branches from deploying to GitHub Pages or pushing to protected branches, you cannot fully test the workflow end-to-end from a PR branch in this repository.
+
+**However, you can verify the workflow logic and steps as follows:**
+
+1. **Review the Workflow Steps**
+
+   - Confirm that the workflow includes steps to:
+     - Generate the sponsorship data.
+     - Save a dated snapshot to `data/history/YYYY-MM-DD.json`.
+     - Commit and push the snapshot to the `history` branch.
+     - Deploy the latest data to GitHub Pages.
+
+2. **Test Locally (Optional)**
+
+   - You can run the relevant scripts locally to ensure they generate the expected files:
+     ```bash
+     scripts/combine-sponsorships.sh
+     mkdir -p data/history
+     cp data/all-sponsorships.json data/history/$(date +%F).json
+     ```
+   - Check that `data/history/YYYY-MM-DD.json` is created and valid.
+
+3. **Test in a Fork (Optional, for Full End-to-End)**
+
+   - If you want to test the full workflow (including branch pushes and Pages deployment), fork the repository and follow these steps:
+     - Push your PR branch to your fork.
+     - Optionally, edit `.github/workflows/deploy-api.yml` in your fork to allow the workflow to run on your branch.
+     - Push a commit to trigger the workflow.
+     - Verify that the workflow runs, updates the `history` branch, and deploys to GitHub Pages in your fork.
+
+**Note:**  
+Due to GitHub security restrictions, PR branches in the main repo cannot push to protected branches or deploy to protected environments. Full end-to-end testing is only possible in a fork or after merging to `main`.
