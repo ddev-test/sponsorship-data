@@ -154,12 +154,12 @@ jobs:
             
             <h2>Usage</h2>
             <pre>// Existing consumers - no changes needed.
-            fetch('https://ddev.github.io/sponsorship-data/data/all-sponsorships.json')
+            fetch('https://ddev-test.github.io/sponsorship-data/data/all-sponsorships.json')
               .then(response => response.json())
               .then(data => console.log(data));</pre>
             
             <h2>Repository</h2>
-            <p><a href="https://github.com/ddev/sponsorship-data">Source code and documentation</a></p>
+            <p><a href="https://github.com/ddev-test/sponsorship-data">Source code and documentation</a></p>
           </body>
           </html>
           EOF
